@@ -356,50 +356,18 @@
             Telegram.WebApp.expand();
         },
         close() {
+            DemoApp.sendMessage();
             Telegram.WebApp.close();
         },
 
         // actions
-        sendMessage(msg_id, with_webview) {
-            if (!DemoApp.initDataUnsafe.query_id) {
-                alert('WebViewQueryId not defined');
-                return;
-            }
-
-            document.querySelectorAll('button').forEach((btn) => btn.disabled = true);
-
-            const btn       = document.querySelector('#btn_status');
-            btn.textContent = 'Sending...';
-
-            DemoApp.apiRequest('sendMessage', {
-                msg_id      : msg_id || '',
-                with_webview: !DemoApp.initDataUnsafe.receiver && with_webview ? 1 : 0
-            }, function (result) {
-                document.querySelectorAll('button').forEach((btn) => btn.disabled = false);
-
-                if (result.response) {
-                    if (result.response.ok) {
-                        btn.textContent   = 'Message sent successfully!';
-                        btn.className     = 'ok';
-                        btn.style.display = 'block';
-                    } else {
-                        btn.textContent   = result.response.description;
-                        btn.className     = 'err';
-                        btn.style.display = 'block';
-                        alert(result.response.description);
-                    }
-                } else if (result.error) {
-                    btn.textContent   = result.error;
-                    btn.className     = 'err';
-                    btn.style.display = 'block';
-                    alert(result.error);
-                } else {
-                    btn.textContent   = 'Unknown error';
-                    btn.className     = 'err';
-                    btn.style.display = 'block';
-                    alert('Unknown error');
-                }
-            });
+        sendMessage() {
+            const title = document.querySelector('#tfs_title').value;
+            const descr = document.querySelector('#tfs_description').value;
+            let text = []
+            text.push({"title":title});
+            text.push({"descr":descr});                      
+            Telegram.WebApp.sendData(text);
         },
         
         checkInitData() {
