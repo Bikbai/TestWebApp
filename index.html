@@ -341,7 +341,8 @@
             let data = [];
             data.push({"title":title});
             data.push({"descr":descr});
-            Telegram.WebApp.sendData(data);
+            document.getElementById('tfs_description').value = JSON.stringify(data);
+            Telegram.WebApp.sendData(JSON.stringify(data));
             Telegram.WebApp.close();
         });
     </script>            
