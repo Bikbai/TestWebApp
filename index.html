@@ -332,13 +332,6 @@
 </body>
 
 <script type="application/javascript">
-
-    /*
-     * This is a demo code for Telegram WebApp for Bots
-     * It contains basic examples of how to use the API
-     * Note: all requests to backend are disabled in this demo, you should use your own backend
-     */
-
     const DemoApp = {
         initData      : Telegram.WebApp.initData || '',
         initDataUnsafe: Telegram.WebApp.initDataUnsafe || {},
@@ -348,7 +341,7 @@
             document.body.style.visibility = '';
             Telegram.WebApp.ready();
             Telegram.WebApp.MainButton.setParams({
-                text      : 'CLOSE WEBVIEW',
+                text      : 'Отправить и закрыть',
                 is_visible: true
             }).onClick(DemoApp.close);
         },
@@ -357,7 +350,7 @@
         },
         close() {
             DemoApp.sendMessage();
-            Telegram.WebApp.close();
+//            Telegram.WebApp.close();
         },
 
         // actions
@@ -369,58 +362,13 @@
             text.push({"descr":descr});                      
             Telegram.WebApp.sendData(text);
         },
-        
-        checkInitData() {
-            const webViewStatus = document.querySelector('#webview_data_status');
-            if (DemoApp.initDataUnsafe.query_id &&
-                DemoApp.initData &&
-                webViewStatus.classList.contains('status_need')
-            ) {
-                webViewStatus.classList.remove('status_need');
-                DemoApp.apiRequest('checkInitData', {}, function (result) {
-                    if (result.ok) {
-                        webViewStatus.textContent = 'Hash is correct (async)';
-                        webViewStatus.className   = 'ok';
-                    } else {
-                        webViewStatus.textContent = result.error + ' (async)';
-                        webViewStatus.className   = 'err';
-                    }
-                });
-            }
-        },
     }
-
-    const DemoAppMenu = {
-        init() {
-            DemoApp.init();
-            document.body.classList.add('gray');
-            Telegram.WebApp.setHeaderColor('secondary_bg_color');
-        }
-    };
-
-    const DemoAppInitData = {
-        init() {
-            DemoApp.init();
-            Telegram.WebApp.onEvent('themeChanged', function () {
-                document.getElementById('theme_data').innerHTML = JSON.stringify(Telegram.WebApp.themeParams, null, 2);
-            });
-            document.getElementById('webview_data').innerHTML = JSON.stringify(DemoApp.initDataUnsafe, null, 2);
-            document.getElementById('theme_data').innerHTML   = JSON.stringify(Telegram.WebApp.themeParams, null, 2);
-            DemoApp.checkInitData();
-        }
-    };
 </script>    
 
     
 <script type="application/javascript">
-    if (DemoApp.initDataUnsafe.query_id) {
-        document.getElementById('main_btn').style.display = 'block';
-    }
-    document.getElementById('tfs_title').focus();
-
-    DemoApp.checkInitData();
     DemoApp.init();
-
+    document.getElementById('tfs_title').focus();
 </script>
     
 </html>
