@@ -333,7 +333,8 @@
     <script type="application/javascript">
         Telegram.WebApp.ready();
         Telegram.WebApp.expand();
-        document.getElementById('tfs_title').focus();        
+        document.getElementById('tfs_title').focus();
+        document.getElementById('tfs_title').value = "Loaded";
         Telegram.WebApp.MainButton.setText('Сохранить и закрыть').show().onClick(function () {
             const title = document.querySelector('#tfs_title').value;
             const descr = document.querySelector('#tfs_description').value;
