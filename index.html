@@ -335,7 +335,9 @@
             initDataUnsafe: Telegram.WebApp.initDataUnsafe || {},
             MainButton    : Telegram.WebApp.MainButton,
     
-            init(options) {
+            init() {
+                let ttl = document.querySelector('#tfs_title');
+                ttl.value = "LOADED";
                 document.body.style.visibility = '';
                 Telegram.WebApp.ready();
                 Telegram.WebApp.MainButton.setParams({
