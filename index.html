@@ -328,48 +328,28 @@
     <section id="top_sect" class="second">
         <input class="input" contenteditable="true" placeholder="Введите заголовок (краткое описание)" id="tfs_title" />
         <input class="input" contenteditable="true" placeholder="Введите описание" id="tfs_description" />
-        <button id="main_btn" onclick="DemoApp.sendMessage('');">Send «Hello, World!»</button>
+        <button id="main_btn" onclick="sendMessage();">Send «Hello, World!»</button>
     </section>
     <script type="application/javascript">
-        const DemoApp = {
-            initData      : Telegram.WebApp.initData || '',
-            initDataUnsafe: Telegram.WebApp.initDataUnsafe || {},
-            MainButton    : Telegram.WebApp.MainButton,
-    
-            init() {
-                let ttl = document.querySelector('#tfs_title');
-                ttl.value = "LOADED";
-                document.body.style.visibility = '';
-                Telegram.WebApp.ready();
-                Telegram.WebApp.MainButton.setParams({
-                    text      : 'Отправить и закрыть',
-                    is_visible: true
-                }).onClick(DemoApp.close);
-            },
-            expand() {
-                Telegram.WebApp.expand();
-            },
-            close() {
-                DemoApp.sendMessage();
-    //            Telegram.WebApp.close();
-            },
-    
-            // actions
-            sendMessage() {
-                const title = document.querySelector('#tfs_title').value;
-                const descr = document.querySelector('#tfs_description').value;
-                let text = []
-                text.push({"title":title});
-                text.push({"descr":descr});                      
-                Telegram.WebApp.sendData(text);
-            },
+        const sendMessage = {
+            Telegram.WebApp.sendData("TEST TEXT");
         }
-    </script>    
-    
-        
-    <script type="application/javascript">
-        DemoApp.init();
-        document.getElementById('tfs_title').focus();
     </script>
+    <script type="application/javascript">
+        Telegram.WebApp.ready();
+        Telegram.WebApp.MainButton.setText('Сохранить и закрыть').show().onClick(function () {
+            const title = document.querySelector('#tfs_title').value;
+            const descr = document.querySelector('#tfs_description').value;
+            let data = [];
+            data.push({"title":title});
+            data.push({"descr":descr});
+            Telegram.WebApp.sendData(text);
+            Telegram.WebApp.close();
+        };
+    </script>    
+    <script type="text/javascript">
+        Telegram.WebApp.expand();
+        document.getElementById('tfs_title').focus();
+    </script>            
 </body>    
 </html>
