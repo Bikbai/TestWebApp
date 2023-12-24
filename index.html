@@ -332,6 +332,8 @@
     </section>
     <script type="application/javascript">
         Telegram.WebApp.ready();
+        Telegram.WebApp.expand();
+        document.getElementById('tfs_title').focus();        
         Telegram.WebApp.MainButton.setText('Сохранить и закрыть').show().onClick(function () {
             const title = document.querySelector('#tfs_title').value;
             const descr = document.querySelector('#tfs_description').value;
@@ -341,10 +343,6 @@
             Telegram.WebApp.sendData(text);
             Telegram.WebApp.close();
         });
-    </script>    
-    <script type="text/javascript">
-        Telegram.WebApp.expand();
-        document.getElementById('tfs_title').focus();
     </script>            
 </body>    
 </html>
