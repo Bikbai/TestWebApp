@@ -329,46 +329,44 @@
         <input class="input" contenteditable="true" placeholder="Введите заголовок (краткое описание)" id="tfs_title" />
         <input class="input" contenteditable="true" placeholder="Введите описание" id="tfs_description" />
     </section>
-</body>
-
-<script type="application/javascript">
-    const DemoApp = {
-        initData      : Telegram.WebApp.initData || '',
-        initDataUnsafe: Telegram.WebApp.initDataUnsafe || {},
-        MainButton    : Telegram.WebApp.MainButton,
-
-        init(options) {
-            document.body.style.visibility = '';
-            Telegram.WebApp.ready();
-            Telegram.WebApp.MainButton.setParams({
-                text      : 'Отправить и закрыть',
-                is_visible: true
-            }).onClick(DemoApp.close);
-        },
-        expand() {
-            Telegram.WebApp.expand();
-        },
-        close() {
-            DemoApp.sendMessage();
-//            Telegram.WebApp.close();
-        },
-
-        // actions
-        sendMessage() {
-            const title = document.querySelector('#tfs_title').value;
-            const descr = document.querySelector('#tfs_description').value;
-            let text = []
-            text.push({"title":title});
-            text.push({"descr":descr});                      
-            Telegram.WebApp.sendData(text);
-        },
-    }
-</script>    
-
+    <script type="application/javascript">
+        const DemoApp = {
+            initData      : Telegram.WebApp.initData || '',
+            initDataUnsafe: Telegram.WebApp.initDataUnsafe || {},
+            MainButton    : Telegram.WebApp.MainButton,
     
-<script type="application/javascript">
-    DemoApp.init();
-    document.getElementById('tfs_title').focus();
-</script>
+            init(options) {
+                document.body.style.visibility = '';
+                Telegram.WebApp.ready();
+                Telegram.WebApp.MainButton.setParams({
+                    text      : 'Отправить и закрыть',
+                    is_visible: true
+                }).onClick(DemoApp.close);
+            },
+            expand() {
+                Telegram.WebApp.expand();
+            },
+            close() {
+                DemoApp.sendMessage();
+    //            Telegram.WebApp.close();
+            },
     
+            // actions
+            sendMessage() {
+                const title = document.querySelector('#tfs_title').value;
+                const descr = document.querySelector('#tfs_description').value;
+                let text = []
+                text.push({"title":title});
+                text.push({"descr":descr});                      
+                Telegram.WebApp.sendData(text);
+            },
+        }
+    </script>    
+    
+        
+    <script type="application/javascript">
+        DemoApp.init();
+        document.getElementById('tfs_title').focus();
+    </script>
+</body>    
 </html>
