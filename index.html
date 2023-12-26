@@ -231,28 +231,51 @@
         small {
             font-size: 12px;
         }
+
+        select {
+            padding: .6em 1.4em .5em .8em; width: 100%;
+            font-size: 14px;
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid #aaa;
+                box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+
+        }
+        .row {
+          display: flex;
+        }
+
+        .column {
+          flex: 50%;
+        }
     </style>
 </head>
 
 <body class="">
     <section id="top_sect" class="second">
         <p>Введите данные ошибки в поля ниже:</p>
+        <input class="input" contenteditable="true" placeholder="Номер заявки, если есть" id="request_number" />
         <input class="input" contenteditable="true" placeholder="Введите заголовок (краткое описание)" id="tfs_title" />
         <input class="input" contenteditable="true" placeholder="Введите описание" id="tfs_description" />
-        <label for="dog-names">Choose a dog name:</label> 
-            <select name="dog-names" id="dog-names"> 
-                <option value="rigatoni">Rigatoni</option> 
-                <option value="dave">Dave</option> 
-                <option value="pumpernickel">Pumpernickel</option> 
-                <option value="reeses">Reeses</option> 
-            </select>        
-        <button id="main_btn" onclick="">Send «TEST»</button>
+        <select name="project" id="project">
+            <option value="ФЦОД ПС">ФЦОД ПС</option>
+            <option value="ФЦОД-М">ФЦОД-М</option>
+            <option value="ПТК ПК">ПТК ПК</option>
+        </select>
+        <div id="footer" class="row">
+            <div id="footer-column1" class="column">
+                <p id="status">Status:</p>
+            </div>
+            <div id="footer-column2" class="column">
+                <p id="version">Версия 1.0</p>
+            </div>
+        </div>
     </section>
     <script type="application/javascript">
         Telegram.WebApp.ready();
         Telegram.WebApp.expand();
         document.getElementById('tfs_title').focus();
-        document.getElementById('tfs_title').value = "Loaded";
+        document.getElementById('status').innerText = "Загружен успешно";
         Telegram.WebApp.MainButton.setText('Сохранить и закрыть').show().onClick(function () {
             const title = document.querySelector('#tfs_title').value;
             const descr = document.querySelector('#tfs_description').value;
@@ -263,6 +286,6 @@
             Telegram.WebApp.sendData(JSON.stringify(data));
             Telegram.WebApp.close();
         });
-    </script>            
-</body>    
+    </script>
+</body>
 </html>
