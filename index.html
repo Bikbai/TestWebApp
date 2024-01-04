@@ -277,11 +277,11 @@
         document.getElementById('tfs_title').focus();
         document.getElementById('status').innerText = "Загружен успешно";
         Telegram.WebApp.MainButton.setText('Сохранить и закрыть').show().onClick(function () {
-            let data = [];
-            data.push({"title":document.querySelector('#tfs_title').value});
-            data.push({"descr":document.querySelector('#tfs_description').value});
-            data.push({"project":document.querySelector('#project').value});
-            data.push({"request_number":document.querySelector('#request_number').value});
+            let data = {
+                "title": document.querySelector('#tfs_title').value,
+                "descr": document.querySelector('#tfs_description').value,
+                "project": document.querySelector('#project').value,
+                "request_number":document.querySelector('#request_number').value};
             Telegram.WebApp.sendData(JSON.stringify(data));
             Telegram.WebApp.close();
         });
